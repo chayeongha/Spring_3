@@ -18,8 +18,8 @@ public class QnaDAOTest extends TestAbstractCase{
 	private QnaDAO qnaDAO;
 	
 	@Test
-	public void qnaListTest(Map<String, Integer> map)throws Exception {
-		List<QnaVO> ar= qnaDAO.qnaList(map);
+	public void qnaListTest()throws Exception {
+		List<QnaVO> ar= qnaDAO.qnaList();
 		
 		assertNotNull(ar.size());
 		
