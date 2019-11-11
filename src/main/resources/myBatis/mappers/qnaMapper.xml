@@ -6,10 +6,14 @@
   
   <mapper namespace="qnaMapper">
   
-  <select id="qnaList">
+  <select id="qnaList" >
   		
-  		select * from qna
-  
+  		<!-- select * from 
+			(select N.*,rownum R from
+				(select * from qna order by num desc)N)
+		where R between #{startRow} and #{lastRow}
+ -->
+  				select * from qna order by num desc
   
   
   </select>

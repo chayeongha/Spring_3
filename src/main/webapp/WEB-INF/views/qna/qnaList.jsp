@@ -16,5 +16,44 @@
 			<h1>QnA List Page</h1>
 			
 			
+		
+		<table class="table">
+			<thead>
+				<tr class="info">
+					<th>Num</th>
+					<th>Title</th>
+					<th>Writer</th>
+					<th>Date</th>
+					<th>Hit</th>
+					<th>Ref</th>
+					<th>Step</th>
+					<th>Depth</th>
+				</tr>
+			</thead>
+			<tbody>
+
+		
+				<c:forEach items="${list}" var="dto" varStatus="st">
+
+					<tr class="warning">
+						<td>${dto.num}</td>
+						<td><a href="">${dto.title}</a></td>
+						<td>${dto.writer}</td>
+						<td>${dto.reg_date}</td>
+						<td>${dto.hit}</td>
+						<td>${dto.ref}</td>
+						<td>${dto.step}</td>
+						<td>${dto.depth}</td>
+						
+					</tr>
+
+				</c:forEach>
+
+				
+  
+  
+ 
+			</tbody>
+		</table>
 </body>
 </html>
