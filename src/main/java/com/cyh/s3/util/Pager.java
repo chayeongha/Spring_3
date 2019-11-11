@@ -12,11 +12,20 @@ public class Pager {
 	
 	private Integer curBlock;
 	
+	private Integer totalBlock;
+	
 	public Pager() {
 		perPage=10;
 	}
 	
 	
+	
+	public Integer getTotalBlock() {
+		return totalBlock;
+	}
+
+
+
 	public Integer getCurBlock() {
 		return curBlock;
 	}
@@ -56,14 +65,14 @@ public class Pager {
 	 //3. 전체 블럭의 갯수를구한다.
 		//지역변수선언 
 		int perBlock=5;
-		int totalBlock= totalPage/perBlock;
+		totalBlock= totalPage/perBlock;
 		if(totalPage%perBlock !=0 ) {
 			
 			totalBlock++;
 			
 		}
 	//4. curPage를 이용해서 현재 블럭번호(curBlock)가 몇번인지 알아야함.
-		 curBlock = curPage/perBlock;
+		curBlock = curPage/perBlock;
 		if(curPage%perBlock != 0) {
 			curBlock++;
 			
@@ -72,6 +81,11 @@ public class Pager {
 	//5. curBlock으로 startNum과 lastNum을 구해야함.
 		startNum= (curBlock-1)*perBlock+1;
 		lastNum= curBlock*perBlock;
+		
+		if(curBlock == totalBlock) {
+			lastNum = totalPage;
+			
+		}
 		
 		
 		

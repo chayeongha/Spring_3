@@ -54,7 +54,7 @@
 			<div>
 				  <ul class="pagination">
 				  				<!--gt=>표시와같다  -->
-				  <c:if test="${pager.curBlock gt 1}">
+				  <c:if test="${pager.curBlock>1}">
 				  	<li><a href="./noticeList?curPage=${pager.startNum-1}">이전</a></li>
 				 </c:if>	
 				 
@@ -63,7 +63,10 @@
 				 	<li><a href="./noticeList?curPage=${i}">${i}</a></li>
 				 		
 				 	</c:forEach>
+				 			<!-- lt= <표시와 같다. -->
+				 	<c:if test="${pager.curBlock lt pager.totalBlock}">
 				 		<li><a href="./noticeList?curPage=${pager.lastNum+1}">다음</a></li>
+				 		</c:if>
 				</ul>
 			</div>
 		
