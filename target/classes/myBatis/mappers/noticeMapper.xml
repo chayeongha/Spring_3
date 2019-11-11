@@ -15,7 +15,7 @@
 
 
 
-	<select id="noticeList" resultType="com.cyh.s3.model.board.NoticeVO" parameterType="java.util.Map">
+	<select id="noticeList"  parameterType="com.cyh.s3.util.RowMaker" resultType="com.cyh.s3.model.board.NoticeVO">
 
 		select * from 
 			(select N.*,rownum R from

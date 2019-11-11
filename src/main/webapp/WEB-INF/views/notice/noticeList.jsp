@@ -18,7 +18,7 @@
 		<!-- <a href="./noticeSelect?n=33">Select One</a>
 		<a href="./noticeWrite">Notice Write</a>
 		<img alt="" src="../resources/images/Iu3.jpg"> -->
-		
+		<h1>${list.get(0).getNum()}</h1>
 		<table class="table">
 			<thead>
 				<tr class="info">
@@ -31,15 +31,15 @@
 			</thead>
 			<tbody>
 
-
-				<c:forEach items="${list}" var="dto" varStatus="st">
+		
+				<c:forEach items="${list}" var="dto2" varStatus="st">
 
 					<tr class="warning">
-						<td>${dto.num}</td>
-						<td><a href="./noticeSelect.notice?num=${pageScope.dto.num}">${pageScope.dto.title}</a></td>
-						<td>${dto.writer}</td>
-						<td>${dto.reg_date}</td>
-						<td>${dto.hit}</td>
+						<td>${dto2.num}</td>
+						<td><a href="./noticeSelect.notice?num=${dto2.num}">${dto2.title}</a></td>
+						<td>${dto2.writer}</td>
+						<td>${dto2.reg_date}</td>
+						<td>${dto2.hit}</td>
 						
 					</tr>
 
@@ -53,11 +53,17 @@
 		</table>
 			<div>
 				  <ul class="pagination">
-				 	<c:forEach begin="1" end="${totalPage}" var="i">
+				  				<!--gt=>표시와같다  -->
+				  <c:if test="${pager.curBlock gt 1}">
+				  	<li><a href="./noticeList?curPage=${pager.startNum-1}">이전</a></li>
+				 </c:if>	
+				 
+				 	<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 				 
 				 	<li><a href="./noticeList?curPage=${i}">${i}</a></li>
 				 		
 				 	</c:forEach>
+				 		<li><a href="./noticeList?curPage=${pager.lastNum+1}">다음</a></li>
 				</ul>
 			</div>
 		

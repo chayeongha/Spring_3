@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cyh.s3.model.board.NoticeVO;
 import com.cyh.s3.service.board.NoticeService;
+import com.cyh.s3.util.Pager;
 
 @Controller
 @RequestMapping("/notice/**")
@@ -27,13 +28,21 @@ public class NoticeController {
 	//view:   /WEB-INF/views/notice/noticeList.jsp
 	
 	@RequestMapping("noticeList")
-	public void noticeList(Model model ,@RequestParam(required = false, defaultValue ="1") int curPage) throws Exception{
-		//매개변수 cupage를 매개변수를받는다.
-		Map<String, Object> map= noticeService.noticeList(curPage);
-        List<NoticeVO> ar=	(List<NoticeVO>)map.get("list");
-        int totalPage= (Integer)map.get("totalPage");
-		model.addAttribute("list",ar);
-		model.addAttribute("totalPage" ,totalPage);
+	public void noticeList(Model model ,Pager pager) throws Exception{
+		//매개변수 curpage를 매개변수를받는다.
+		//페이져 방식
+		
+		List<NoticeVO>ar=	noticeService.noticeList(pager);
+		
+		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
+		
+		/*
+		 * Map<String, Object> map= noticeService.noticeList(pager); List<NoticeVO> ar=
+		 * (List<NoticeVO>)map.get("list"); int totalPage=
+		 * (Integer)map.get("totalPage"); model.addAttribute("list",ar);
+		 * model.addAttribute("totalPage" ,totalPage);
+		 */
 	}
 	
 	//noticeSelect
