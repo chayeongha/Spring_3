@@ -51,6 +51,16 @@
  
 			</tbody>
 		</table>
+			<div>
+				  <ul class="pagination">
+				 	<c:forEach begin="1" end="${totalPage}" var="i">
+				 
+				 	<li><a href="./noticeList?curPage=${i}">${i}</a></li>
+				 		
+				 	</c:forEach>
+				</ul>
+			</div>
+		
 		
   				<a href="./noticeWrite" >글쓰기</a>
 		

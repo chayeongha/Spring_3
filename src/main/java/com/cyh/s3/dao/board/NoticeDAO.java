@@ -49,10 +49,16 @@ public class NoticeDAO {
 	}
 	
 	//list
-	public List<NoticeVO> noticeList() throws Exception{
+	public List<NoticeVO> noticeList(Map<String, Integer> map) throws Exception{
 		
-	return sqlSession.selectList(NAMESPACE+"noticeList");
+	return sqlSession.selectList(NAMESPACE+"noticeList", map);
 		
+	}
+	
+	//list count
+	public int noticeCount() throws Exception{
+		
+		return sqlSession.selectOne(NAMESPACE+"noticeCount");
 	}
 	
 	

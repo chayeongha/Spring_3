@@ -6,10 +6,21 @@
 
 <mapper namespace="noticeMapper">
 
-	<select id="noticeList" resultType="com.cyh.s3.model.board.NoticeVO">
+	<select id="noticeCount" resultType="java.lang.Integer">
+	
+		select count(num) from notice
+			
+	
+	</select>
 
-		select * from notice order by num desc
 
+
+	<select id="noticeList" resultType="com.cyh.s3.model.board.NoticeVO" parameterType="java.util.Map">
+
+		select * from 
+			(select N.*,rownum R from
+				(select * from notice order by num desc)N)
+		where R between #{startRow} and #{lastRow}
 
 	</select>
 

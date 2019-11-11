@@ -13,8 +13,21 @@ import com.cyh.s3.model.board.NoticeVO;
 
 public class NoticeDAOTest extends TestAbstractCase {
 	
+	
 	@Inject
 	private NoticeDAO noticeDAO;
+	
+
+	//noticecount
+	@Test
+	public void noticeCountTest()throws Exception{
+		
+	int count=noticeDAO.noticeCount();
+	assertEquals(140, count);
+	}
+	
+	
+	
 	
 	/* @Test */
 	public void checkDAO() throws Exception{
@@ -24,25 +37,34 @@ public class NoticeDAOTest extends TestAbstractCase {
 	}
 	
 	
+	
+	
+	
 
 	
 	/* @Test */
 	public void noticeWriteTest() throws Exception{
 
+	for(int i=0;i<110;i++) {
+		
 	NoticeVO noticeVO = new NoticeVO();
 
-	noticeVO.setTitle("dfd");
+	noticeVO.setTitle("nt"+i);
 	
-	noticeVO.setWriter("df");
+	noticeVO.setWriter("df"+i);
 	
-	noticeVO.setContents("te");
+	noticeVO.setContents("te"+i);
 	
 	int result= noticeDAO.noticeWrite(noticeVO);
 	
-	assertEquals(1, result);
+		}
+	/*assertEquals(1, result);*/
+	
 	}
 	
-	@Test
+	
+	
+	/* @Test */
 	public void noticeDelete() throws Exception{
 		
 	int result	=noticeDAO.noticeDelete(3);
@@ -98,6 +120,9 @@ public class NoticeDAOTest extends TestAbstractCase {
 		assertNotNull(ar.size());
 	
 	}
+	
+	
+	
 	
 	
 	
