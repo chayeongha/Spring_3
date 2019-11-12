@@ -14,9 +14,9 @@
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice List</a></li>
-          <li><a href="${pageContext.request.contextPath}/notice/noticeWrite.jsp">Notice Write</a></li>
+          <li><a href="${pageContext.request.contextPath}/notice/noticeWrite">Notice Write</a></li>
 
-          <li><a href="${pageContext.request.contextPath}/qna/qnaList.jsp ">QNA</a></li>
+          <li><a href="${pageContext.request.contextPath}/qna/qnaList">QNA</a></li>
 
 
         </ul>
