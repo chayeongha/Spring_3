@@ -2,6 +2,7 @@ package com.cyh.s3.util;
 
 public class Pager {
 
+
 	private Integer curPage; // 현재 페이지 번호
 	private Integer perPage; // 블럭 당 페이지 개수
 	
@@ -132,5 +133,9 @@ public class Pager {
 
 	
 
+
+	
+	
+	
 
 }
