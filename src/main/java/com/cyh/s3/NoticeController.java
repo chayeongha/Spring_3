@@ -27,15 +27,22 @@ public class NoticeController {
 	//첫화면이 LIST    : /notice/noticeList  method :GET  
 	//view:   /WEB-INF/views/notice/noticeList.jsp
 	
-	@RequestMapping("noticeList")
-	public void noticeList(Model model ,Pager pager) throws Exception{
+	@RequestMapping(value="noticeList", method=RequestMethod.GET)
+	public ModelAndView noticeList(Pager pager) throws Exception{
 		//매개변수 curpage를 매개변수를받는다.
 		//페이져 방식
 		
 		List<NoticeVO>ar=	noticeService.noticeList(pager);
 		
-		model.addAttribute("list", ar);
-		model.addAttribute("pager", pager);
+		ModelAndView mv= new ModelAndView();
+		
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("notice/noticeList");
+		
+		return mv;	
+		
+		
 		
 		/*
 		 * Map<String, Object> map= noticeService.noticeList(pager); List<NoticeVO> ar=

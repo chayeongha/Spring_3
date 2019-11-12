@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cyh.s3.dao.board.NoticeDAO;
 import com.cyh.s3.model.board.NoticeVO;
 import com.cyh.s3.util.Pager;
-import com.cyh.s3.util.RowMaker;
+
 
 @Service
 public class NoticeService {
@@ -52,15 +52,18 @@ public class NoticeService {
 			
 		}
 	
+		
+		
 		//curPage매개변수를 받는다
 		public List<NoticeVO> noticeList(Pager pager)throws Exception{
 			//pager방식
 			
-			RowMaker rowMaker = pager.makeRow();
+			pager.makeRow();
 				
-			pager.makePager(noticeDAO.noticeCount());
+			
+			pager.makePage(noticeDAO.noticeCount(pager));
 		
-			return noticeDAO.noticeList(rowMaker);
+			return noticeDAO.noticeList(pager);
 		}
 		
 		

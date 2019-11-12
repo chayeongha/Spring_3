@@ -6,20 +6,49 @@
 
 <mapper namespace="noticeMapper">
 
-	<select id="noticeCount" resultType="java.lang.Integer">
-	
+	<select id="noticeCount" resultType="java.lang.Integer"
+		parameterType="com.cyh.s3.util.Pager">
+
 		select count(num) from notice
-			
+		<choose>
+			<when test="kind=='kt'">
+				where title like '%'||#{search}||'%'
+			</when>
+			<when test="kind =='kw'">
+				where writer like '%'||#{search}||'%'
+			</when>
+			<when test="kind == 'kc'">
+				where contents like '%'||#{search}||'%'
+			</when>
+
+		</choose>
 	
+
 	</select>
 
 
 
-	<select id="noticeList"  parameterType="com.cyh.s3.util.RowMaker" resultType="com.cyh.s3.model.board.NoticeVO">
+	<select id="noticeList" parameterType="com.cyh.s3.util.Pager"
+		resultType="com.cyh.s3.model.board.NoticeVO">
 
-		select * from 
-			(select N.*,rownum R from
-				(select * from notice order by num desc)N)
+		select * from
+		(select N.*,rownum R from
+		(select * from notice
+			<choose>
+				<when test="kind=='kt'">
+					where title like '%'||#{search}||'%'
+				</when>
+				<when test="kind =='kw'">
+					where writer like '%'||#{search}||'%'
+				</when>
+				<when test="kind == 'kc'">
+					where contents like '%'||#{search}||'%'
+				</when>
+	
+			</choose>
+
+
+		order by num desc)N)
 		where R between #{startRow} and #{lastRow}
 
 	</select>
@@ -38,25 +67,29 @@
 		parameterType="com.cyh.s3.model.board.NoticeVO">
 
 		insert into notice
-		values(board_seq.nextval, #{title}, #{writer}, #{contents} , sysdate , 0)
+		values(board_seq.nextval, #{title},
+		#{writer}, #{contents} , sysdate , 0)
 
 	</insert>
 
 	<delete id="noticeDelete" parameterType="java.lang.Integer">
 
-		delete notice where num=#{num}
+		delete notice where
+		num=#{num}
 
 	</delete>
 
 
-	 <update id="noticeUpdate" parameterType="com.cyh.s3.model.board.NoticeVO">
-	
-		update notice set title=#{title} , writer=#{writer}, contents=#{contents} where num=#{num}
-	
-	</update> 
-	
-	
-	
-	
+	<update id="noticeUpdate"
+		parameterType="com.cyh.s3.model.board.NoticeVO">
+
+		update notice set title=#{title} , writer=#{writer}, contents=#{contents}
+		where num=#{num}
+
+	</update>
+
+
+
+
 
 </mapper>

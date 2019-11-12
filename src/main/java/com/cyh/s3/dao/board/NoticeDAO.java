@@ -1,5 +1,6 @@
 package com.cyh.s3.dao.board;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.cyh.s3.model.board.NoticeVO;
-import com.cyh.s3.util.RowMaker;
+import com.cyh.s3.util.Pager;
+
 
 
 @Repository 
@@ -49,20 +51,21 @@ public class NoticeDAO {
 		return sqlSession.selectOne(NAMESPACE+ "noticeSelect" , map);
 	}
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	//list
-	public List<NoticeVO> noticeList(RowMaker rowMaker) throws Exception{
+	public List<NoticeVO> noticeList(Pager pager) throws Exception{
 		
-	return sqlSession.selectList(NAMESPACE+"noticeList", rowMaker);
+	return sqlSession.selectList(NAMESPACE+"noticeList", pager);
 		
 	}
 	
 	//list count
-	public int noticeCount() throws Exception{
+	public int noticeCount(Pager pager) throws Exception{
 		
-		return sqlSession.selectOne(NAMESPACE+"noticeCount");
+		return sqlSession.selectOne(NAMESPACE+"noticeCount", pager);
 	}
 	
-	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	//update
 	public int noticeUpdate(NoticeVO noticeVO)throws Exception {
