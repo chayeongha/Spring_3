@@ -5,15 +5,41 @@ public class Pager {
 	private Integer curPage;//현재페이지 번호
 
 	private Integer perPage;//불러올 글의 개수...
+	//검색 창의 kind search 
+	private String kind;//검색 종류
+	private String search;//검색어
+
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	public String getSearch() {
+		if(search == null) {
+			search= "";
+		}
+		
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
 
 	//View(JSP)
 	private Integer startNum;  //시작번호
 	private Integer lastNum;		// 끝번호
-	private Integer culBlock;   //현재 블럭 번호
+	private Integer curBlock;   //현재 블럭 번호
 	private Integer totalBlock; //전체블럭갯수
 	
-	
+	//DB
+		private Integer startRow; //시작 rownum
+		private Integer lastRow; // 마지막 rownum
 
+
+		
+		
 	public Integer getStartNum() {
 		return startNum;
 	}
@@ -26,11 +52,11 @@ public class Pager {
 	public void setLastNum(Integer lastNum) {
 		this.lastNum = lastNum;
 	}
-	public Integer getCulBlock() {
-		return culBlock;
+	public Integer getCurBlock() {
+		return curBlock;
 	}
-	public void setCulBlock(Integer culBlock) {
-		this.culBlock = culBlock;
+	public void setCurBlock(Integer curBlock) {
+		this.curBlock = curBlock;
 	}
 	public Integer getTotalBlock() {
 		return totalBlock;
@@ -39,11 +65,8 @@ public class Pager {
 		this.totalBlock = totalBlock;
 	}
 
-	//DB
-	private Integer startRow; //시작 rownum
-	private Integer lastRow; // 마지막 rownum
-
-	private int curBlock;
+	
+	
 
 	public Integer getCurPage() {
 		if(curPage ==null || curPage==0) {

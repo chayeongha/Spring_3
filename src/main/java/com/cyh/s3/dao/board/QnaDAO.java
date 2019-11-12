@@ -25,10 +25,16 @@ public class QnaDAO {
 		return sqlSession.selectList(NAMESPACE+"qnaList", pager);
 	}
 
-	public int qnaCount() throws Exception{
+	public int qnaCount(Pager pager) throws Exception{
 		
-		return sqlSession.selectOne(NAMESPACE+"qnaCount");
+		return sqlSession.selectOne(NAMESPACE+"qnaCount",pager);
 		
+		
+	}
+	public int qnaInsert(QnaVO qnaVO ) throws Exception{
+		
+		return sqlSession.insert(NAMESPACE+"qnaInsert", qnaVO);
+				
 		
 	}
 	

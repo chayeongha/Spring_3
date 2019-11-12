@@ -18,7 +18,7 @@ public class QnaDAOTest extends TestAbstractCase{
 	private QnaDAO qnaDAO;
 	
 	
-	 @Test 
+	/* @Test */
 	public void Test()throws Exception {
 		
 			this.qnaDAOTest();
@@ -38,6 +38,18 @@ public class QnaDAOTest extends TestAbstractCase{
 				}
 
 	
+	@Test
+	public void qnaInsertTest()throws Exception {
+		for(int i=0; i<110; i++) {
+			QnaVO qnaVO = new QnaVO();
+			qnaVO.setTitle("dued"+i);
+			qnaVO.setWriter("cyh"+i);
+			qnaVO.setContents("jaldml"+i);
+			qnaDAO.qnaInsert(qnaVO);
+			Thread.sleep(300);
+		}
+
+	}
 	
 	
 

@@ -27,14 +27,16 @@ public class QnaService {
 		pager.makeRow();
 		
 		//int count=qnaDAO.qnaCount();
-		pager.makePage(qnaDAO.qnaCount());
+		pager.makePage(qnaDAO.qnaCount(pager));
 		
 		return qnaDAO.qnaList(pager);
 		
 		
 	}
-	
-	
+	//qnaInsert
+	public int qnaInsert(QnaVO qnaVO) throws Exception{
+		return qnaDAO.qnaInsert(qnaVO);
+	}
 	
 	
 	
