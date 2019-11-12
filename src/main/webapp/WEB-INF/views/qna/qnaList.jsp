@@ -12,12 +12,13 @@
 </head>
 <body>
 	<div>
-		<form action="./qnaList">
+		<form id= "frm" action="./qnaList">
+			<input type="hidden" id="curPage" value="1" name="curPage">
+			
 			<select name="kind">
-				<option value="kt">Title</option>
-				<option value="kc" >Contents</option>
-				<option value="kw">Writer</option>
-
+				<option id="kt" value="kt">Title</option>
+				<option id="kc" value="kc" >Contents</option>
+				<option id="kw"  value="kw">Writer</option>
 			</select> <input type="text" name="search" value="${pager.search}">
 			<button>검색</button>
 
@@ -64,17 +65,36 @@
 	 <div>
 	 	 <ul class="pagination">
 		 	 <c:if test="${pager.curBlock gt 1}">
-			 	 <li><a href="./qnaList?curPage=${pager.startNum-1 }">이전</a></li>
+			 	<span id="${pager.startNum-1 }" class="List">이전</span>
 		 	 </c:if>
 			  	<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				  	<li><a href="./qnaList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+				 <span id="${i}" class="List">${i}</span> 
 			  	</c:forEach>
 			 <c:if test="${pager.curBlock lt pager.totalBlock }">
-				 <li><a href="./qnaList?curPage=${pager.lastNum+1 }">다음</a></li>		 
+				<span id="${pager.lastNum+1 }" class="List">다음</span>
 			 </c:if>
 	  	 </ul>
 	  </div>
+	  
 	  <a href="./qnaWrite">Write</a>
-	 </div>	
+	 
+	 
+	 <!-- 제이쿼리 -->
+	 <script type="text/javascript">
+	 
+	 	var kind ='${pager.kind}'
+	 	
+	 	if(kind=''){
+	 		kind="kt";
+	 	}
+	 	$("#"+kind).prop("selected" ,true);
+	 	$(".List").click(function () {
+	 		$("#curPage").val($(this).attr("id"));
+			$("#frm").submit();
+			
+		});
+	 	
+	
+	 </script>
 </body>
 </html>

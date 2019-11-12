@@ -9,6 +9,7 @@
 		select count(num) from qna <choose>
 					<when test="kind == 'kt'">
 						where title like '%'||#{search}||'%'
+						
 					</when>
 					<when test="kind == 'kw'">
 						where writer like '%'||#{search}||'%' 
