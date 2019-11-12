@@ -6,39 +6,40 @@
 
 <mapper namespace="qnaMapper">
 	<select id="qnaCount" resultType="java.lang.Integer"  parameterType="com.cyh.s3.util.Pager">
-		select count(num) from qna <choose>
+		select count(num) from qna  
+		<choose>
 					<when test="kind == 'kt'">
 						where title like '%'||#{search}||'%'
-						
 					</when>
 					<when test="kind == 'kw'">
-						where writer like '%'||#{search}||'%' 
+						where writer like '%'||#{search}||'%'
 					</when>
 					<otherwise>
-						where contents like '%'||#{search}||'%' 
-					</otherwise>						
-		</choose>
+						where contents like '%'||#{search}||'%'
+					</otherwise>
+				</choose>
 		
 	</select>
 		
 	
 	
 	<select id="qnaList" resultType="com.cyh.s3.model.board.QnaVO" parameterType="com.cyh.s3.util.Pager">
-		select * from( select rownum R , Q.* from
+		select * from
+		( select Q.*, rownum R from
 		(select * from qna  
 		<choose>
 					<when test="kind == 'kt'">
-						where title like '%'||#{search}||'%' 
+						where title like '%'||#{search}||'%'
 					</when>
 					<when test="kind == 'kw'">
-						where writer like '%'||#{search}||'%' 
+						where writer like '%'||#{search}||'%'
 					</when>
 					<otherwise>
-							where contents like '%'||#{search}||'%' 
-					</otherwise>						
-		</choose>
+						where contents like '%'||#{search}||'%'
+					</otherwise>
+				</choose>
 		
-		order by num desc) Q)
+		 order by num desc) Q)
 		where R between  #{startRow}and #{lastRow} 
 	
 	</select>

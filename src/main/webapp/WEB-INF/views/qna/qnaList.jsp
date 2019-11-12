@@ -11,19 +11,17 @@
 
 </head>
 <body>
-	<div>
-		<form id= "frm" action="./qnaList">
-			<input type="hidden" id="curPage" value="1" name="curPage">
-			
+	 <div>
+		<form id="frm" action="./qnaList">
+		<input type="hidden" id="curPage" value="1" name="curPage">
 			<select name="kind">
-				<option id="kt" value="kt">Title</option>
-				<option id="kc" value="kc" >Contents</option>
-				<option id="kw"  value="kw">Writer</option>
-			</select> <input type="text" name="search" value="${pager.search}">
+					<option id="kt" value="kt">TITLE</option>
+					<option id="kc" value="kc">CONTENTS</option>
+					<option id="kw" value="kw">WRITER</option>
+			</select>
+			<input type="text" name="search" value="${pager.search}">
 			<button>검색</button>
-
 		</form>
-
 	</div>
 
 	<h1>QnA List Page</h1>
@@ -62,16 +60,19 @@
 		</tbody>
 	</table>
 
-	 <div>
+	  <div>
 	 	 <ul class="pagination">
 		 	 <c:if test="${pager.curBlock gt 1}">
-			 	<span id="${pager.startNum-1 }" class="List">이전</span>
+		 	 	<span id="${pager.startNum-1}" class="list">이전</span>
+<%-- 			 	<li><a href="./qnaList?curPage=${pager.startNum-1}">이전</a></li> --%>
 		 	 </c:if>
-			  	<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				 <span id="${i}" class="List">${i}</span> 
-			  	</c:forEach>
-			 <c:if test="${pager.curBlock lt pager.totalBlock }">
-				<span id="${pager.lastNum+1 }" class="List">다음</span>
+			 <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+			 	<span id="${i}" class="list">${i}</span>
+<%-- 				<li><a href="./qnaList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li> --%>
+			 </c:forEach>
+			 <c:if test="${pager.curBlock lt pager.totalBlock}">
+			 	<span id="${pager.lastNum+1}" class="list">다음</span>
+<%-- 				<li><a href="./qnaList?curPage=${pager.lastNum+1 }">다음</a></li>		  --%>
 			 </c:if>
 	  	 </ul>
 	  </div>
@@ -80,21 +81,17 @@
 	 
 	 
 	 <!-- 제이쿼리 -->
-	 <script type="text/javascript">
-	 
-	 	var kind ='${pager.kind}'
-	 	
-	 	if(kind=''){
-	 		kind="kt";
-	 	}
-	 	$("#"+kind).prop("selected" ,true);
-	 	$(".List").click(function () {
-	 		$("#curPage").val($(this).attr("id"));
+	<script type="text/javascript">
+		var kind = '${pager.kind}';
+		if(kind ==''){
+			kind="kt";
+		}
+	 	$("#"+kind).prop("selected", true);
+	 	$(".list").click(function() {
+			$("#curPage").val($(this).attr("id"));
 			$("#frm").submit();
-			
 		});
-	 	
-	
+	 
 	 </script>
 </body>
 </html>

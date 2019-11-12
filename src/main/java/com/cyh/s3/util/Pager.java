@@ -2,13 +2,24 @@ package com.cyh.s3.util;
 
 public class Pager {
 
-	private Integer curPage;//현재페이지 번호
-
-	private Integer perPage;//불러올 글의 개수...
-	//검색 창의 kind search 
-	private String kind;//검색 종류
-	private String search;//검색어
-
+	private Integer curPage; // 현재 페이지 번호
+	private Integer perPage; // 블럭 당 페이지 개수
+	
+	// DB
+	private Integer startRow; // 시작 row번호 
+	private Integer lastRow; // 마지막 row번호
+	
+	// view(jsp)
+	private Integer startNum; // 시작번호
+	private Integer lastNum; // 마지막 번호
+	private Integer curBlock; // 현재 블럭 번호
+	private Integer totalBlock; // 전체 블럭 개수
+	
+	// List의 kind와 search를  받아오도록 설정
+	private String kind;	// 검색종류
+	private String search;	// 검색어
+	
+	
 	public String getKind() {
 		return kind;
 	}
@@ -17,29 +28,13 @@ public class Pager {
 	}
 	public String getSearch() {
 		if(search == null) {
-			search= "";
+			search = "";
 		}
-		
 		return search;
 	}
 	public void setSearch(String search) {
 		this.search = search;
 	}
-
-
-	//View(JSP)
-	private Integer startNum;  //시작번호
-	private Integer lastNum;		// 끝번호
-	private Integer curBlock;   //현재 블럭 번호
-	private Integer totalBlock; //전체블럭갯수
-	
-	//DB
-		private Integer startRow; //시작 rownum
-		private Integer lastRow; // 마지막 rownum
-
-
-		
-		
 	public Integer getStartNum() {
 		return startNum;
 	}
@@ -64,13 +59,9 @@ public class Pager {
 	public void setTotalBlock(Integer totalBlock) {
 		this.totalBlock = totalBlock;
 	}
-
-	
-	
-
 	public Integer getCurPage() {
-		if(curPage ==null || curPage==0) {
-			curPage =1;
+		if(curPage == null || curPage == 0) {
+			this.curPage = 1;
 		}
 		return curPage;
 	}
@@ -78,8 +69,8 @@ public class Pager {
 		this.curPage = curPage;
 	}
 	public Integer getPerPage() {
-		if(perPage==null || perPage==0) {
-			perPage=10;
+		if(perPage == null || perPage == 0) {
+			this.perPage = 10;
 		}
 		return perPage;
 	}
@@ -98,46 +89,44 @@ public class Pager {
 	public void setLastRow(Integer lastRow) {
 		this.lastRow = lastRow;
 	}
-
-	//makeRow
 	
-	public void makeRow() {
-		this.startRow = (this.getCurPage()-1)*this.getPerPage()+1;
-		this.lastRow = this.getCurPage()* this.getPerPage();
-	}
-		
+	// makeRow
+	
+		public void makeRow() {
+			this.startRow = (this.getCurPage()-1)*this.getPerPage()+1;
+			this.lastRow = this.getCurPage() * this.getPerPage();
+		}
 	
 	//makePage
 	
+	
 	public void makePage(int totalCount) {
-		//2. 전체 페이지수 totalPage
-		int totalPage = totalCount/this.getCurPage();
-		if(totalCount%this.getPerPage() !=0) {
-			totalPage++;
-		}
+		// 전체 글의 개수
 		
-		//3. 전체블럭수 totalBlock
+		// 전체 페이지 수(totalPage)
+		int totalPage = totalCount / this.getPerPage();
+		if(totalCount%this.getPerPage() != 0) {
+			totalPage ++;
+		}
+		// 전체 블럭수(totalBLock)
 		int perBlock = 5;
 		totalBlock = totalPage/perBlock;
-		if(totalPage%perBlock !=0 ) {
-			totalBlock++;
-			
+		if(totalPage%perBlock != 0) {
+			totalBlock ++;
 		}
-		//4. 현재 curPage로 curBlock 구하기.
+		
+		// curPage로 curBlock 구하기
 		curBlock = this.getCurPage()/perBlock;
 		if(this.getCurPage()%perBlock != 0) {
-			curBlock++;
+			curBlock ++;
 		}
 		
-		//5.curBlock  으로 startnum , lastNUm;
-		startNum=(curBlock-1)*perBlock+1;
-		lastNum= curBlock*perBlock;
-		
+		// curBlock으로 startNum, lastNum
+		startNum = (curBlock-1)*perBlock+1;
+		lastNum = curBlock * perBlock;
 		if(curBlock == totalBlock) {
 			lastNum = totalPage;
-			
 		}
-		
 	}
 
 
