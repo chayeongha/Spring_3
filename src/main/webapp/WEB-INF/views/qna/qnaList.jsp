@@ -25,35 +25,42 @@
 					<th>Writer</th>
 					<th>Date</th>
 					<th>Hit</th>
-					<th>Ref</th>
-					<th>Step</th>
-					<th>Depth</th>
+			
 				</tr>
 			</thead>
 			<tbody>
 
 		
-				<c:forEach items="${list}" var="dto" varStatus="st">
+				<c:forEach items="${list}" var="vo" >
 
 					<tr class="warning">
-						<td>${dto.num}</td>
-						<td><a href="">${dto.title}</a></td>
-						<td>${dto.writer}</td>
-						<td>${dto.reg_date}</td>
-						<td>${dto.hit}</td>
-						<td>${dto.ref}</td>
-						<td>${dto.step}</td>
-						<td>${dto.depth}</td>
-						
+						<td>${vo.num}</td>
+						<td><a href="./qnaSelect?num=${vo.num}">${vo.title}</a></td>
+						<td>${vo.writer}</td>
+						<td>${vo.reg_date}</td>
+						<td>${vo.hit}</td>
+					
 					</tr>
 
 				</c:forEach>
 
 				
-  
-  
- 
+
 			</tbody>
 		</table>
+		
+		<c:if test="${pager.curBlock gt 1} ">
+		
+			<a href="./qnaList?curPage=${pager.startNum-1}">[이전]</a>
+		
+		</c:if>
+		
+		<c:forEach begin="${pager.startNum} " end="${pager.lastNum }" var="i">
+			<a href="./qnaList?curPage=${i}">${i}</a>
+		</c:forEach>
+		
+		<c:if test="${pager.curBlock lt pager.totalBlock} ">
+				<a href="./qnaList?curPage=${pager.lastNum+1}">[다음]</a>
+		</c:if>
 </body>
 </html>

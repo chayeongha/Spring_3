@@ -14,6 +14,7 @@ public class QnaVO {
 	private int step;
 	private int depth;
 	
+	
 	public int getNum() {
 		return num;
 	}

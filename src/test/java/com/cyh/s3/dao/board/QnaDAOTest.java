@@ -17,13 +17,28 @@ public class QnaDAOTest extends TestAbstractCase{
 	@Inject
 	private QnaDAO qnaDAO;
 	
-	@Test
-	public void qnaListTest()throws Exception {
-		List<QnaVO> ar= qnaDAO.qnaList();
+	
+	 @Test 
+	public void Test()throws Exception {
 		
-		assertNotNull(ar.size());
-		
+			this.qnaDAOTest();
 		
 	}
+	
+	private void qnaDAOTest() {
+		
+		assertNotNull(qnaDAO);
+	}
+	
+	
+	/* @Test */
+	public void qnaListTest()throws Exception {
+		//	List<QnaVO>	ar=qnaDAO.qnaList();
+			//	assertNotEquals(0, ar.size());
+				}
+
+	
+	
+	
 
 }

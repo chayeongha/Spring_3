@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.cyh.s3.model.board.QnaVO;
+import com.cyh.s3.util.Pager;
 
 @Repository
 public class QnaDAO {
@@ -16,14 +17,19 @@ public class QnaDAO {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String NAMESPACE= "qnaMapper";
+	private static final String NAMESPACE="qnaMapper.";
 	
 	//list
-	public List<QnaVO> qnaList(Map<String, Integer>map)throws Exception{
+	public List<QnaVO> qnaList(Pager pager)throws Exception{
 		
-		
-		
-		return sqlSession.selectList(NAMESPACE+"qnaList" ,map);
+		return sqlSession.selectList(NAMESPACE+"qnaList", pager);
 	}
 
+	public int qnaCount() throws Exception{
+		
+		return sqlSession.selectOne(NAMESPACE+"qnaCount");
+		
+		
+	}
+	
 }
