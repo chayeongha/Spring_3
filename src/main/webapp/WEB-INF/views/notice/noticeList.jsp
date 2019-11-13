@@ -83,7 +83,7 @@
 	  	 </ul>
 	  </div>
 	 
-	  <a href="./qnaWrite">Write</a>
+	  <a href="./noticeWrite">Write</a>
 	
 	 
 	 <script type="text/javascript">
