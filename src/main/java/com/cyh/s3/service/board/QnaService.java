@@ -19,6 +19,31 @@ public class QnaService {
 	private QnaDAO qnaDAO;
 	
 	
+	//qnaReply
+	public int qnaReply(QnaVO qnaVO) throws Exception{
+		//부모의 정보를 알아오자
+		QnaVO parent	= qnaDAO.qnaSelect(qnaVO.getNum());//부모의글번호
+		System.out.println(parent.getRef());
+		int result	= qnaDAO.qnaReplyUpdate(parent);
+		
+		qnaVO.setRef(parent.getRef());
+		qnaVO.setStep(parent.getStep()+1);
+		qnaVO.setDepth(parent.getDepth()+1);
+		
+	    result =qnaDAO.qnaReply(qnaVO);
+	    
+	    return result;
+		
+	}
+	
+	
+	//qnaSelect
+	public QnaVO qnaSelect(int num) throws Exception{
+		
+		return qnaDAO.qnaSelect(num);
+	}
+	
+	
 	
 	//qnaList 
 	public List<QnaVO> qnaList(Pager pager) throws Exception{
@@ -33,9 +58,9 @@ public class QnaService {
 		
 		
 	}
-	//qnaInsert
-	public int qnaInsert(QnaVO qnaVO) throws Exception{
-		return qnaDAO.qnaInsert(qnaVO);
+	//qnaWrite
+	public int qnaWrite(QnaVO qnaVO) throws Exception{
+		return qnaDAO.qnaWrite(qnaVO);
 	}
 	
 	

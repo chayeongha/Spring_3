@@ -1,5 +1,6 @@
 package com.cyh.s3.dao.board;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,18 +25,40 @@ public class QnaDAO {
 		
 		return sqlSession.selectList(NAMESPACE+"qnaList", pager);
 	}
-
+	//count
 	public int qnaCount(Pager pager) throws Exception{
 		
 		return sqlSession.selectOne(NAMESPACE+"qnaCount",pager);
 		
-		
-	}
-	public int qnaInsert(QnaVO qnaVO ) throws Exception{
-		
-		return sqlSession.insert(NAMESPACE+"qnaInsert", qnaVO);
-				
-		
 	}
 	
+	//write
+	public int qnaWrite(QnaVO qnaVO ) throws Exception{
+		
+		return sqlSession.insert(NAMESPACE+"qnaWrite", qnaVO);
+				
+	}
+	
+	//selectone
+	public QnaVO qnaSelect(int num)throws Exception{
+		
+		/*
+		 * Map<String, Integer> map = new HashMap<String, Integer>();
+		 * 
+		 * map.put("num", num);
+		 */
+		
+		return sqlSession.selectOne(NAMESPACE+ "qnaSelect",num );	
+	}
+	
+	public int qnaReply(QnaVO qnaVO)throws Exception {
+		
+		return sqlSession.insert(NAMESPACE+ "qnaReply",qnaVO);
+	}
+	
+	
+	public int qnaReplyUpdate(QnaVO qnaVO)throws Exception {
+		
+		return sqlSession.update(NAMESPACE+ "qnaReplyUpdate",qnaVO);
+	}
 }

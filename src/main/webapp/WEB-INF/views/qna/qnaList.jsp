@@ -47,7 +47,10 @@
 
 				<tr class="warning">
 					<td>${vo.num}</td>
-					<td><a href="./qnaSelect?num=${vo.num}">${vo.title}</a></td>
+					<td>
+					<c:forEach begin="1" end="${vo.depth}">--</c:forEach>
+					<a href="./qnaSelect?num=${vo.num}">${vo.title}</a></td>
+					
 					<td>${vo.writer}</td>
 					<td>${vo.reg_date}</td>
 					<td>${vo.hit}</td>
@@ -56,7 +59,7 @@
 
 			</c:forEach>
 
-
+	
 
 		</tbody>
 	</table>
@@ -80,6 +83,7 @@
 
 	<a href="./qnaWrite">Write</a>
 
+	
 
 	<!-- 제이쿼리 -->
 	<script type="text/javascript">

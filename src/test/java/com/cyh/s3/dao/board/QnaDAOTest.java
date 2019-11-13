@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.junit.Test;
 
 import com.cyh.s3.TestAbstractCase;
+import com.cyh.s3.model.board.NoticeVO;
 import com.cyh.s3.model.board.QnaVO;
 
 public class QnaDAOTest extends TestAbstractCase{
@@ -38,19 +39,27 @@ public class QnaDAOTest extends TestAbstractCase{
 				}
 
 	
-	@Test
+	/* @Test */
 	public void qnaInsertTest()throws Exception {
 		for(int i=0; i<110; i++) {
 			QnaVO qnaVO = new QnaVO();
 			qnaVO.setTitle("dued"+i);
 			qnaVO.setWriter("cyh"+i);
 			qnaVO.setContents("jaldml"+i);
-			qnaDAO.qnaInsert(qnaVO);
+			qnaDAO.qnaWrite(qnaVO);
 			Thread.sleep(300);
 		}
 
 	}
 	
+	@Test 
+	public void qnaSelectTest() throws Exception{
+		
+		QnaVO qnaVO=QnaDAO.qnaSelect(258);
+		
+		assertNotNull(qnaVO);
+		
+	}
 	
 
 }
